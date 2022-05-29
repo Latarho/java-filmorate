@@ -1,0 +1,556 @@
+{
+	"id": "e90f4c45-0715-41b9-aaa8-56b9755a24da",
+	"name": "API Test Sprint 1",
+	"timestamp": "2022-05-29T15:37:28.297Z",
+	"collection_id": "10543289-0b8893dc-6974-4e48-b9f4-9b8bddfdc234",
+	"folder_id": 0,
+	"environment_id": "0",
+	"totalPass": 23,
+	"totalFail": 0,
+	"results": [
+		{
+			"id": "66c8eb28-b931-4510-bd58-cd51d4109765",
+			"name": "User create",
+			"url": "http://localhost:8080/users",
+			"time": 423,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true,
+				"Test user": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Test user": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				423
+			],
+			"allTests": [
+				{
+					"Status code is 200": true,
+					"Test user": true
+				}
+			]
+		},
+		{
+			"id": "b14f1840-eb4b-4d46-b8f6-2757fef6da4c",
+			"name": "User create Fail login",
+			"url": "http://localhost:8080/users",
+			"time": 42,
+			"responseCode": {
+				"code": 400,
+				"name": "Bad Request"
+			},
+			"tests": {
+				"Status code is 500 or 400": true
+			},
+			"testPassFailCounts": {
+				"Status code is 500 or 400": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				42
+			],
+			"allTests": [
+				{
+					"Status code is 500 or 400": true
+				}
+			]
+		},
+		{
+			"id": "6e8b938c-8780-4598-9901-7a2dfd3846e0",
+			"name": "User create Fail email",
+			"url": "http://localhost:8080/users",
+			"time": 36,
+			"responseCode": {
+				"code": 400,
+				"name": "Bad Request"
+			},
+			"tests": {
+				"Status code is 500 or 400": true
+			},
+			"testPassFailCounts": {
+				"Status code is 500 or 400": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				36
+			],
+			"allTests": [
+				{
+					"Status code is 500 or 400": true
+				}
+			]
+		},
+		{
+			"id": "aa3af1fb-8bc2-45a1-8ee6-eb57223fdf28",
+			"name": "User create Fail birthday",
+			"url": "http://localhost:8080/users",
+			"time": 17,
+			"responseCode": {
+				"code": 400,
+				"name": "Bad Request"
+			},
+			"tests": {
+				"Status code is 500 or 400": true
+			},
+			"testPassFailCounts": {
+				"Status code is 500 or 400": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				17
+			],
+			"allTests": [
+				{
+					"Status code is 500 or 400": true
+				}
+			]
+		},
+		{
+			"id": "c9a2c17c-2186-42e3-aa30-d90629f6b7ec",
+			"name": "User update",
+			"url": "http://localhost:8080/users",
+			"time": 18,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true,
+				"Test user": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Test user": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				18
+			],
+			"allTests": [
+				{
+					"Status code is 200": true,
+					"Test user": true
+				}
+			]
+		},
+		{
+			"id": "fe889992-a710-445b-b98d-8c1468cfd73b",
+			"name": "User update unknown",
+			"url": "http://localhost:8080/users",
+			"time": 23,
+			"responseCode": {
+				"code": 500,
+				"name": "Internal Server Error"
+			},
+			"tests": {
+				"Status code is 500": true
+			},
+			"testPassFailCounts": {
+				"Status code is 500": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				23
+			],
+			"allTests": [
+				{
+					"Status code is 500": true
+				}
+			]
+		},
+		{
+			"id": "34ed1591-c5ff-45b0-9ab1-cec6945e0136",
+			"name": "User get All",
+			"url": "http://localhost:8080/users",
+			"time": 18,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true,
+				"Test list user": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Test list user": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				18
+			],
+			"allTests": [
+				{
+					"Status code is 200": true,
+					"Test list user": true
+				}
+			]
+		},
+		{
+			"id": "068281ec-9a2e-4280-a809-f2e0133172d7",
+			"name": "Create user with empty name",
+			"url": "http://localhost:8080/users",
+			"time": 8,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true,
+				"Test empty name": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Test empty name": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				8
+			],
+			"allTests": [
+				{
+					"Status code is 200": true,
+					"Test empty name": true
+				}
+			]
+		},
+		{
+			"id": "621bf8d0-5547-4712-a730-720db85887c9",
+			"name": "Film create",
+			"url": "http://localhost:8080/films",
+			"time": 63,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true,
+				"Test created film": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Test created film": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				63
+			],
+			"allTests": [
+				{
+					"Status code is 200": true,
+					"Test created film": true
+				}
+			]
+		},
+		{
+			"id": "bb20288a-28d1-485e-82d7-20550586fc21",
+			"name": "Film create Fail name",
+			"url": "http://localhost:8080/films",
+			"time": 12,
+			"responseCode": {
+				"code": 400,
+				"name": "Bad Request"
+			},
+			"tests": {
+				"Status code is 500 or 400": true
+			},
+			"testPassFailCounts": {
+				"Status code is 500 or 400": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				12
+			],
+			"allTests": [
+				{
+					"Status code is 500 or 400": true
+				}
+			]
+		},
+		{
+			"id": "c7be5250-3c94-47d4-bcef-34c5cd2b156b",
+			"name": "Film create Fail description",
+			"url": "http://localhost:8080/films",
+			"time": 17,
+			"responseCode": {
+				"code": 400,
+				"name": "Bad Request"
+			},
+			"tests": {
+				"Status code is 500 or 400": true
+			},
+			"testPassFailCounts": {
+				"Status code is 500 or 400": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				17
+			],
+			"allTests": [
+				{
+					"Status code is 500 or 400": true
+				}
+			]
+		},
+		{
+			"id": "134e4ca4-980b-433b-9319-1b59d81d9842",
+			"name": "Film create Fail releaseDate",
+			"url": "http://localhost:8080/films",
+			"time": 14,
+			"responseCode": {
+				"code": 400,
+				"name": "Bad Request"
+			},
+			"tests": {
+				"Status code is 500 or 400": true
+			},
+			"testPassFailCounts": {
+				"Status code is 500 or 400": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				14
+			],
+			"allTests": [
+				{
+					"Status code is 500 or 400": true
+				}
+			]
+		},
+		{
+			"id": "66c2a141-245f-4846-b251-e23143205c24",
+			"name": "Film create Fail duration",
+			"url": "http://localhost:8080/films",
+			"time": 16,
+			"responseCode": {
+				"code": 400,
+				"name": "Bad Request"
+			},
+			"tests": {
+				"Status code is 500 or 400": true
+			},
+			"testPassFailCounts": {
+				"Status code is 500 or 400": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				16
+			],
+			"allTests": [
+				{
+					"Status code is 500 or 400": true
+				}
+			]
+		},
+		{
+			"id": "a37f2ad8-8712-4967-a16b-879ca65c94d9",
+			"name": "Film update",
+			"url": "http://localhost:8080/films",
+			"time": 11,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true,
+				"Test updated film": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Test updated film": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				11
+			],
+			"allTests": [
+				{
+					"Status code is 200": true,
+					"Test updated film": true
+				}
+			]
+		},
+		{
+			"id": "d46da67c-c067-48b3-b457-4e3f251c12eb",
+			"name": "Film update unknown",
+			"url": "http://localhost:8080/films",
+			"time": 16,
+			"responseCode": {
+				"code": 500,
+				"name": "Internal Server Error"
+			},
+			"tests": {
+				"Status code is 500": true
+			},
+			"testPassFailCounts": {
+				"Status code is 500": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				16
+			],
+			"allTests": [
+				{
+					"Status code is 500": true
+				}
+			]
+		},
+		{
+			"id": "a2d855ad-04c7-4528-8eaa-dccd1a3e40a3",
+			"name": "Film get All",
+			"url": "http://localhost:8080/films",
+			"time": 16,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true,
+				"Test films": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Test films": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				16
+			],
+			"allTests": [
+				{
+					"Status code is 200": true,
+					"Test films": true
+				}
+			]
+		}
+	],
+	"count": 1,
+	"totalTime": 750,
+	"collection": {
+		"requests": [
+			{
+				"id": "66c8eb28-b931-4510-bd58-cd51d4109765",
+				"method": "POST"
+			},
+			{
+				"id": "b14f1840-eb4b-4d46-b8f6-2757fef6da4c",
+				"method": "POST"
+			},
+			{
+				"id": "6e8b938c-8780-4598-9901-7a2dfd3846e0",
+				"method": "POST"
+			},
+			{
+				"id": "aa3af1fb-8bc2-45a1-8ee6-eb57223fdf28",
+				"method": "POST"
+			},
+			{
+				"id": "c9a2c17c-2186-42e3-aa30-d90629f6b7ec",
+				"method": "PUT"
+			},
+			{
+				"id": "fe889992-a710-445b-b98d-8c1468cfd73b",
+				"method": "PUT"
+			},
+			{
+				"id": "34ed1591-c5ff-45b0-9ab1-cec6945e0136",
+				"method": "GET"
+			},
+			{
+				"id": "068281ec-9a2e-4280-a809-f2e0133172d7",
+				"method": "POST"
+			},
+			{
+				"id": "621bf8d0-5547-4712-a730-720db85887c9",
+				"method": "POST"
+			},
+			{
+				"id": "bb20288a-28d1-485e-82d7-20550586fc21",
+				"method": "POST"
+			},
+			{
+				"id": "c7be5250-3c94-47d4-bcef-34c5cd2b156b",
+				"method": "POST"
+			},
+			{
+				"id": "134e4ca4-980b-433b-9319-1b59d81d9842",
+				"method": "POST"
+			},
+			{
+				"id": "66c2a141-245f-4846-b251-e23143205c24",
+				"method": "POST"
+			},
+			{
+				"id": "a37f2ad8-8712-4967-a16b-879ca65c94d9",
+				"method": "PUT"
+			},
+			{
+				"id": "d46da67c-c067-48b3-b457-4e3f251c12eb",
+				"method": "PUT"
+			},
+			{
+				"id": "a2d855ad-04c7-4528-8eaa-dccd1a3e40a3",
+				"method": "GET"
+			}
+		]
+	}
+}
