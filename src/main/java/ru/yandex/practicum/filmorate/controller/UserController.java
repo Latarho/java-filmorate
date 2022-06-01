@@ -10,6 +10,7 @@ import ru.yandex.practicum.filmorate.model.User;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import javax.validation.ValidationException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -34,6 +35,7 @@ public class UserController {
         try {
             log.info("Получен запрос к эндпоинту: {} {}, тело запроса {}", request.getMethod(),
                     request.getRequestURI(), user);
+            validationUser(user);
             user.setId(generateId());
             users.put(user.getId(), user);
             log.info("Пользователь: {} успешно создан", user);
@@ -60,6 +62,7 @@ public class UserController {
                 log.info("Пользователь: {} не найден", user);
                 throw new UserNotFoundException("Пользователь: " + user + "не найден");
             } else {
+                validationUser(user);
                 users.put(user.getId(), user);
                 log.info("Пользователь: {} успешно обновлен", user);
             }
@@ -81,6 +84,15 @@ public class UserController {
         usersList.addAll(users.values());
         log.info("В списке usersList содержится {} пользователей", usersList.size());
         return usersList;
+    }
+
+    protected void validationUser(User user) {
+        if (user.getBirthday().isAfter(LocalDate.now())) {
+            throw new ValidationException("Дата рождения пользователя должна быть раньше текущей даты");
+        }
+        if (user.getName().isEmpty()) {
+            user.setName(user.getLogin());
+        }
     }
 
     /**
