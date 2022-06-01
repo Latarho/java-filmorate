@@ -18,7 +18,7 @@ import java.time.LocalDate;
 @ToString
 public class Film {
 
-    private int id;
+    private Long id;
 
     @NotBlank(message = "Поле name не может быть пустым")
     private String name;

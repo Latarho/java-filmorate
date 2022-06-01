@@ -14,7 +14,7 @@ public class UserControllerTests {
     UserController userController = new UserController();
 
     @Test
-    void checkValidationExceptionReleaseDate() {
+    void checkValidationExceptionBirthday() {
         User userOne = new User("dfkjgdf@gdfjklgd.com", "dfkjgdf", "dfkjgdf",
                 LocalDate.of(2030, 11, 28));
         final ValidationException exception = assertThrows(ValidationException.class,

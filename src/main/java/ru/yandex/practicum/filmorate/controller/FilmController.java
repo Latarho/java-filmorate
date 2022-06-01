@@ -20,8 +20,8 @@ import java.util.Map;
 @RequestMapping("/films")
 public class FilmController {
 
-    private final Map<Integer, Film> films = new HashMap<>();
-    private int id = 1;
+    private final Map<Long, Film> films = new HashMap<>();
+    private Long id = 1L;
 
     /**
      * Добавление нового фильма.
@@ -101,7 +101,7 @@ public class FilmController {
      *
      * @return Id фильма.
      */
-    private int generateId() {
+    private Long generateId() {
         return id++;
     }
 }

@@ -11,7 +11,7 @@ import java.time.LocalDate;
 @ToString
 public class User {
 
-    private int id;
+    private Long id;
 
     @NotBlank(message = "Поле email не может быть пустым")
     @Email(message = "Некорректный формат электронной почты")
