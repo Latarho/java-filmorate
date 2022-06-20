@@ -1,44 +1,31 @@
 package ru.yandex.practicum.filmorate.model;
 
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.Builder;
+import lombok.Data;
 
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import java.time.Duration;
 import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Set;
 
-@Getter
-@Setter
-@EqualsAndHashCode
-@ToString
+@Data
+@Builder
 public class Film {
 
     private Long id;
-
-    @NotBlank(message = "Поле name не может быть пустым")
     private String name;
-
-    @Size(min = 1, max = 200, message = "Количество знаков в description должно быть в диапазоне от 1 до 200 знаков")
-    @NotBlank (message = "Поле description не может быть пустым")
     private String description;
-
-    @NotNull(message = "Поле releaseDate может быть пустое, но не может быть null")
     private LocalDate releaseDate;
+    private Long duration;
+    private final Set<Long> likes = new HashSet<>();
 
-    @NotNull(message = "Поле duration может быть пустое, но не может быть null")
-    @EqualsAndHashCode.Exclude
-    @JsonSerialize(using = DurationSerializer.class)
-    private Duration duration;
-
-    public Film (String name, String description, LocalDate releaseDate, Duration duration) {
-        this.name = name;
-        this.description = description;
-        this.releaseDate = releaseDate;
-        this.duration = duration;
+    public void like(Long id) {
+        likes.add(id);
+    }
+    public void unlike(Long id) {
+        likes.remove(id);
+    }
+    public void setLikes(Set<Long> likes) {
+        this.likes.addAll(likes);
     }
 }

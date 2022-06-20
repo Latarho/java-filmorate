@@ -1,75 +1,57 @@
 package ru.yandex.practicum.filmorate.controller;
 
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.HttpStatus;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.server.ResponseStatusException;
-import ru.yandex.practicum.filmorate.exception.UserNotFoundException;
 import ru.yandex.practicum.filmorate.model.User;
+import ru.yandex.practicum.filmorate.model.UserDto;
+import ru.yandex.practicum.filmorate.service.UserService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
-import javax.validation.ValidationException;
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.List;
 
 @Slf4j
 @RestController
 @RequestMapping("/users")
 public class UserController {
 
-    private final Map<Long, User> users = new HashMap<>();
-    private Long id = 1L;
+    private final UserService userService;
+
+    @Autowired
+    public UserController(UserService userService) {
+        this.userService = userService;
+    }
 
     /**
      * Создание нового пользователя.
      *
-     * @param user объект класса User (из тела запроса).
+     * @param userDto объект класса User (из тела запроса).
      * @param request запрос.
      * @return объект класса User.
      */
     @PostMapping
-    public User createUser(@Valid @RequestBody User user, HttpServletRequest request) {
-        try {
-            log.info("Получен запрос к эндпоинту: {} {}, тело запроса {}", request.getMethod(),
-                    request.getRequestURI(), user);
-            validationUser(user);
-            user.setId(generateId());
-            users.put(user.getId(), user);
-            log.info("Пользователь: {} успешно создан", user);
-        } catch (ValidationException exc) {
-            log.info("Произошла ошибка валидации: " + exc.getMessage());
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, exc.getMessage());
-        }
-        return user;
+    public User createUser(@Valid @RequestBody UserDto userDto, HttpServletRequest request) {
+        log.info("Получен запрос к эндпоинту: {} {}, тело запроса {}", request.getMethod(),
+                request.getRequestURI(), userDto);
+        User newUser = userService.createUser(userDto);
+        log.info("Пользователь: {} успешно создан", userDto.getLogin());
+        return newUser;
     }
 
     /**
-     * Обновление существующего пользователя.
+     * Получение значения (объект класса User) по переданному id.
      *
-     * @param user объект класса User (из тела запроса).
+     * @param id идентификатор User.
      * @param request запрос.
-     * @return объект класса User.
+     * @return объект класса User соответствующее переданному id.
      */
-    @PutMapping
-    public User updateUser(@Valid @RequestBody User user, HttpServletRequest request) {
-        try {
-            log.info("Получен запрос к эндпоинту: {} {}, тело запроса {}", request.getMethod(),
-                    request.getRequestURI(), user);
-            if (!users.containsKey(user.getId())) {
-                log.info("Пользователь: {} не найден", user);
-                throw new UserNotFoundException("Пользователь: " + user + "не найден");
-            } else {
-                validationUser(user);
-                users.put(user.getId(), user);
-                log.info("Пользователь: {} успешно обновлен", user);
-            }
-        } catch (ValidationException exc) {
-            log.info("Произошла ошибка валидации: " + exc.getMessage());
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, exc.getMessage());
-        }
+    @GetMapping("/{id}")
+    public User getUserById(@PathVariable Long id, HttpServletRequest request) {
+        log.info("Получен запрос к эндпоинту: {} {}", request.getMethod(),
+                request.getRequestURI());
+        User user = userService.getUserById(id);
+        log.info("Пользователь: {} успешно найден", user.getLogin());
         return user;
     }
 
@@ -79,28 +61,65 @@ public class UserController {
      * @return список пользователей.
      */
     @GetMapping
-    public ArrayList<User> getAllUsers() {
-        ArrayList<User> usersList = new ArrayList<>();
-        usersList.addAll(users.values());
+    public List<User> getAllUsers(HttpServletRequest request) {
+        log.info("Получен запрос к эндпоинту: {} {}", request.getMethod(),
+                request.getRequestURI());
+        List<User> usersList = userService.getAllUsers();
         log.info("В списке usersList содержится {} пользователей", usersList.size());
         return usersList;
     }
 
-    protected void validationUser(User user) {
-        if (user.getBirthday().isAfter(LocalDate.now())) {
-            throw new ValidationException("Дата рождения пользователя должна быть раньше текущей даты");
-        }
-        if (user.getName().isEmpty()) {
-            user.setName(user.getLogin());
-        }
+    /**
+     * Обновление существующего пользователя.
+     *
+     * @param userDto объект класса User (из тела запроса).
+     * @param request запрос.
+     * @return объект класса User.
+     */
+    @PutMapping
+    public User updateUser(@Valid @RequestBody UserDto userDto, HttpServletRequest request) {
+        log.info("Получен запрос к эндпоинту: {} {}, тело запроса {}", request.getMethod(),
+                    request.getRequestURI(), userDto);
+        User user = userService.updateUser(userDto);
+        log.info("Пользователь: {} успешно обновлен", userDto);
+        return user;
     }
 
-    /**
-     * Генерация уникального Id пользователя.
-     *
-     * @return Id пользователя.
-     */
-    private Long generateId() {
-        return id++;
+    //TODO дописать доку
+    @PutMapping("{userId}/friends/{friendId}")
+    public void addFriend(@PathVariable Long userId, @PathVariable Long friendId, HttpServletRequest request) {
+        log.info("Получен запрос к эндпоинту: {} {}", request.getMethod(),
+                request.getRequestURI());
+        userService.addFriend(userId, friendId);
+        log.info("Пользователь: {} успешно добавил в друзья пользователя: {}", userId, friendId);
+    }
+
+    //TODO дописать доку
+    @DeleteMapping("{userId}/friends/{friendId}")
+    public void deleteFriend(@PathVariable Long userId, @PathVariable Long friendId, HttpServletRequest request) {
+        log.info("Получен запрос к эндпоинту: {} {}", request.getMethod(),
+                request.getRequestURI());
+        userService.deleteFriend(userId, friendId);
+        log.info("Пользователь: {} успешно удален", userId);
+    }
+
+    //TODO дописать доку
+    @GetMapping("{userId}/friends")
+    public List<User> findFriends(@PathVariable Long userId, HttpServletRequest request) {
+        log.info("Получен запрос к эндпоинту: {} {}", request.getMethod(),
+                request.getRequestURI());
+        List<User> friendsList = userService.getUserFriends(userId);
+        log.info("В списке friendsList содержится {} пользователей", friendsList.size());
+        return friendsList;
+    }
+
+    //TODO дописать доку
+    @GetMapping("{userId}/friends/common/{otherId}")
+    public List<User> findCommonFriends(@PathVariable Long userId, @PathVariable Long otherId, HttpServletRequest request) {
+        log.info("Получен запрос к эндпоинту: {} {}", request.getMethod(),
+                request.getRequestURI());
+        List<User> commonFriendsList = userService.getCommonFriends(userId, otherId);
+        log.info("В списке commonFriendsList содержится {} пользователей", commonFriendsList.size());
+        return commonFriendsList;
     }
 }

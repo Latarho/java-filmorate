@@ -1,75 +1,57 @@
 package ru.yandex.practicum.filmorate.controller;
 
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.HttpStatus;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.server.ResponseStatusException;
-import ru.yandex.practicum.filmorate.exception.FilmNotFoundException;
 import ru.yandex.practicum.filmorate.model.Film;
+import ru.yandex.practicum.filmorate.model.FilmDto;
+import ru.yandex.practicum.filmorate.service.FilmService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
-import javax.validation.ValidationException;
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.List;
 
 @Slf4j
 @RestController
 @RequestMapping("/films")
 public class FilmController {
 
-    private final Map<Long, Film> films = new HashMap<>();
-    private Long id = 1L;
+    private final FilmService filmService;
+
+    @Autowired
+    public FilmController(FilmService filmService) {
+        this.filmService = filmService;
+    }
 
     /**
      * Добавление нового фильма.
      *
-     * @param film объект класса Film (из тела запроса).
+     * @param filmDto объект класса Film (из тела запроса).
      * @param request запрос.
      * @return объект класса Film.
      */
     @PostMapping
-    public Film addFilm(@Valid @RequestBody Film film, HttpServletRequest request) {
-        try {
-            log.info("Получен запрос к эндпоинту: {} {}, тело запроса {}", request.getMethod(),
-                    request.getRequestURI(), film);
-            validationFilm(film);
-            film.setId(generateId());
-            films.put(film.getId(), film);
-            log.info("Фильм: {} успешно добавлен в фильмотеку", film);
-        } catch (ValidationException exc) {
-            log.info("Произошла ошибка валидации: "+ exc.getMessage());
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, exc.getMessage());
-        }
-        return film;
+    public Film addFilm(@Valid @RequestBody FilmDto filmDto, HttpServletRequest request) {
+        log.info("Получен запрос к эндпоинту: {} {}, тело запроса {}", request.getMethod(),
+                request.getRequestURI(), filmDto);
+        Film newFilm = filmService.addFilm(filmDto);
+        log.info("Фильм: {} успешно добавлен в фильмотеку", filmDto.getName());
+        return newFilm;
     }
 
     /**
-     * Обновление существующего фильма.
+     * Получение значения (объект класса Film) по переданному id.
      *
-     * @param film объект класса Film (из тела запроса).
+     * @param id идентификатор Film.
      * @param request запрос.
-     * @return объект класса Film.
+     * @return объект класса Film соответствующее переданному id.
      */
-    @PutMapping
-    public Film updateFilm(@Valid @RequestBody Film film, HttpServletRequest request) {
-        try {
-            log.info("Получен запрос к эндпоинту: {} {}, тело запроса {}", request.getMethod(),
-                    request.getRequestURI(), film);
-            if (!films.containsKey(film.getId())) {
-                log.info("Фильм: {} не найден", film);
-                throw new FilmNotFoundException("Фильм: " + film + "не найден");
-            } else {
-                validationFilm(film);
-                films.put(film.getId(), film);
-                log.info("Фильм: {} успешно обновлен в фильмотеке", film);
-            }
-        } catch (ValidationException exc) {
-            log.info("Произошла ошибка валидации: "+ exc.getMessage());
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, exc.getMessage());
-        }
+    @GetMapping("/{id}")
+    public Film getFilmById(@PathVariable Long id, HttpServletRequest request) {
+        log.info("Получен запрос к эндпоинту: {} {}", request.getMethod(),
+                request.getRequestURI());
+        Film film = filmService.getFilmById(id);
+        log.info("Фильм: {} успешно найден", film.getName());
         return film;
     }
 
@@ -79,29 +61,56 @@ public class FilmController {
      * @return список фильмов.
      */
     @GetMapping
-    public ArrayList<Film> getAllFilms() {
-        ArrayList<Film> filmsList = new ArrayList<>();
-        filmsList.addAll(films.values());
+    public List<Film> getAllFilms(HttpServletRequest request) {
+        log.info("Получен запрос к эндпоинту: {} {}", request.getMethod(),
+                request.getRequestURI());
+        List<Film> filmsList = filmService.getAllFilms();
         log.info("В списке filmsList содержится {} фильмов", filmsList.size());
         return filmsList;
     }
 
-    protected void validationFilm(Film film) {
-        LocalDate date = LocalDate.of(1895, 12, 28);
-        if (film.getReleaseDate().isBefore(date)) {
-            throw new ValidationException("Дата релиза фильма не может быть раньше 28 января 1895 года");
-        }
-        if (film.getDuration().isNegative() || film.getDuration().isZero()) {
-            throw new ValidationException("Продолжительность фильма должна быть положительной");
-        }
+    /**
+     * Обновление существующего фильма.
+     *
+     * @param filmDto объект класса Film (из тела запроса).
+     * @param request запрос.
+     * @return объект класса Film.
+     */
+    @PutMapping
+    public Film updateFilm(@Valid @RequestBody FilmDto filmDto, HttpServletRequest request) {
+        log.info("Получен запрос к эндпоинту: {} {}, тело запроса {}", request.getMethod(),
+                request.getRequestURI(), filmDto);
+        Film film = filmService.updateFilm(filmDto);
+        log.info("Фильм: {} успешно обновлен", filmDto);
+        return film;
     }
 
-    /**
-     * Генерация уникального Id фильма.
-     *
-     * @return Id фильма.
-     */
-    private Long generateId() {
-        return id++;
+    //TODO дописать доку
+    @PutMapping("/{filmId}/like/{userId}")
+    public void like(@PathVariable Long filmId, @PathVariable Long userId, HttpServletRequest request) {
+        log.info("Получен запрос к эндпоинту: {} {}", request.getMethod(),
+                request.getRequestURI());
+        filmService.likeFilm(filmId, userId);
+        log.info("Пользователь: {} поставил лайк фильму: {}", userId, filmId);
+    }
+
+    //TODO дописать доку
+    @DeleteMapping("/{filmId}/like/{userId}")
+    public void unlike(@PathVariable Long filmId, @PathVariable Long userId, HttpServletRequest request) {
+        log.info("Получен запрос к эндпоинту: {} {}", request.getMethod(),
+                request.getRequestURI());
+        filmService.unlikeFilm(filmId, userId);
+        log.info("Пользователь: {} удалил лайк у фильма: {}", userId, filmId);
+    }
+
+    //TODO дописать доку
+    @GetMapping("/popular")
+    public List<Film> getFilmsSortedByTopLikes(@RequestParam(name = "count", defaultValue = "10", required = false)
+                                                   Integer count, HttpServletRequest request) {
+        log.info("Получен запрос к эндпоинту: {} {}", request.getMethod(),
+                request.getRequestURI());
+        List<Film> filmsList = filmService.getPopular(count);
+        log.info("В списке filmsList содержится {} фильмов", filmsList.size());
+        return filmsList;
     }
 }
