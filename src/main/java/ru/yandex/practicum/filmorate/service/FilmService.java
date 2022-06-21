@@ -58,9 +58,7 @@ public class FilmService {
 
     public Film getFilmById(Long id) {
         Optional<Film> film = filmStorage.getFilmById(id);
-        if (film.isPresent())
-            return film.get();
-        throw new DataNotFoundException("Фильм c Id: " + id + "не найден.");
+        return film.orElseThrow(() -> new DataNotFoundException("Фильм c Id: " + id + "не найден."));
     }
 
     public List<Film> getAllFilms() {
@@ -107,7 +105,6 @@ public class FilmService {
         if (filmFromStorage.isPresent()) {
             Film film = filmFromStorage.get();
             film.like(user.getId());
-            filmStorage.addFilm(film);
         } else
             throw new DataNotFoundException("Фильм не найден.");
     }
@@ -124,7 +121,6 @@ public class FilmService {
         if (filmFromStorage.isPresent()) {
             Film film = filmFromStorage.get();
             film.unlike(user.getId());
-            filmStorage.addFilm(film);
         } else
             throw new DataNotFoundException("Фильм не найден.");
     }

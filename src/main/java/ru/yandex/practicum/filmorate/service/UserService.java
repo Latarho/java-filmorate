@@ -48,10 +48,9 @@ public class UserService {
 
     public User getUserById(Long id) {
         Optional<User> user = userStorage.getUserById(id);
-        if (user.isPresent())
-            return user.get();
-        throw new DataNotFoundException("Пользователь c Id: " + id + "не найден.");
+        return user.orElseThrow(() -> new DataNotFoundException("Пользователь c Id: " + id + "не найден."));
     }
+
 
     public List<User> getAllUsers() {
         return userStorage.getAllUsers();
@@ -62,7 +61,7 @@ public class UserService {
 
         if (userDto.getId() != null) {
             Optional<User> userFromStorage = userStorage.getUserById(userDto.getId());
-            if (userFromStorage.isPresent()) {
+            userFromStorage.orElseThrow(() -> new DataNotFoundException("Пользователь: " + userDto + "не найден."));
                 String name = validationUser(userDto);
                 if (!userFromStorage.get().getEmail().equals(userDto.getEmail()) ||
                         !userFromStorage.get().getLogin().equals(userDto.getLogin())) {
@@ -86,8 +85,6 @@ public class UserService {
                 User userToAddFriends = userFromStorage.get();
                 userBuild.setFriends(userToAddFriends.getFriends());
                 userStorage.createUser(userBuild);
-            } else
-                throw new DataNotFoundException("Пользователь: " + userDto + "не найден.");
         } else {
             throw new ValidationException("Указан некорректный Id.");
         }
@@ -106,11 +103,8 @@ public class UserService {
         if (userFromStorage.isPresent() && friendFromStorage.isPresent()) {
             User user = userFromStorage.get();
             user.addFriend(friendId);
-            userStorage.createUser(user);
-
             User friend = friendFromStorage.get();
             friend.addFriend(userId);
-            userStorage.createUser(friend);
         } else
             throw new DataNotFoundException("Пользователь не найден.");
     }
@@ -125,11 +119,8 @@ public class UserService {
         if (userFromStorage.isPresent() && friendFromStorage.isPresent()) {
             User user = userFromStorage.get();
             user.removeFriend(friendId);
-            userStorage.createUser(user);
-
             User friend = friendFromStorage.get();
             friend.removeFriend(userId);
-            userStorage.createUser(friend);
         } else
             throw new DataNotFoundException("Пользователь не найден.");
     }
