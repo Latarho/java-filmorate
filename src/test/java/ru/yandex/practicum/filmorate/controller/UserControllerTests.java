@@ -1,24 +1,25 @@
 package ru.yandex.practicum.filmorate.controller;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import ru.yandex.practicum.filmorate.model.User;
+import ru.yandex.practicum.filmorate.model.UserDto;
+import ru.yandex.practicum.filmorate.service.UserService;
+import ru.yandex.practicum.filmorate.storage.InMemoryUserStorage;
 
 import javax.validation.ValidationException;
-import java.time.LocalDate;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class UserControllerTests {
 
-    UserController userController = new UserController();
+    UserService userService = new UserService(new InMemoryUserStorage());
 
     @Test
     void checkValidationExceptionBirthday() {
-        User userOne = new User("dfkjgdf@gdfjklgd.com", "dfkjgdf", "dfkjgdf",
-                LocalDate.of(2030, 11, 28));
-        final ValidationException exception = assertThrows(ValidationException.class,
-                () -> userController.validationUser(userOne));
-        assertEquals("Дата рождения пользователя должна быть раньше текущей даты", exception.getMessage());
+        UserDto userOne = new UserDto(
+                null,
+                "dfkjgdf@gdfjklgd.com",
+                "dfkjgdf",
+                "dffgdghkjgdf",
+                "2031-09-10");
+        Assertions.assertThrows(ValidationException.class, () -> userService.validationUser(userOne));
     }
 }
