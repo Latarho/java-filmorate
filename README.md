@@ -4,7 +4,7 @@ __Database diagram__
 
 https://app.quickdatabasediagrams.com/#/d/w36iFn
 
-![](../../Downloads/Filmorate_DBD.png)
+![Filmorate_DBD](https://user-images.githubusercontent.com/53216025/177046855-0c0958f9-1af7-4de0-b25a-e89c93ce6714.png)
 
 __Get user by ID__
 
