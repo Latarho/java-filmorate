@@ -1,4 +1,4 @@
-package ru.yandex.practicum.filmorate.storage;
+package ru.yandex.practicum.filmorate.storage.user;
 
 import ru.yandex.practicum.filmorate.model.User;
 
@@ -12,4 +12,6 @@ public interface UserStorage {
     Optional<User> getUserById(Long id);
 
     List<User> getAllUsers();
+
+    User updateUser(User user);
 }

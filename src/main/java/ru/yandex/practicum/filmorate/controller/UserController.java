@@ -4,7 +4,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import ru.yandex.practicum.filmorate.model.User;
-import ru.yandex.practicum.filmorate.model.UserDto;
 import ru.yandex.practicum.filmorate.service.UserService;
 
 import javax.servlet.http.HttpServletRequest;
@@ -26,16 +25,16 @@ public class UserController {
     /**
      * Создание нового пользователя.
      *
-     * @param userDto объект класса User (из тела запроса).
+     * @param user объект класса User (из тела запроса).
      * @param request запрос.
      * @return объект класса User.
      */
     @PostMapping
-    public User createUser(@Valid @RequestBody UserDto userDto, HttpServletRequest request) {
+    public User createUser(@Valid @RequestBody User user, HttpServletRequest request) {
         log.info("Получен запрос к эндпоинту: {} {}, тело запроса {}", request.getMethod(),
-                request.getRequestURI(), userDto);
-        User newUser = userService.createUser(userDto);
-        log.info("Пользователь: {} успешно создан", userDto.getLogin());
+                request.getRequestURI(), user);
+        User newUser = userService.createUser(user);
+        log.info("Пользователь: {} успешно создан", user.getLogin());
         return newUser;
     }
 
@@ -72,17 +71,17 @@ public class UserController {
     /**
      * Обновление существующего пользователя.
      *
-     * @param userDto объект класса User (из тела запроса).
+     * @param user объект класса User (из тела запроса).
      * @param request запрос.
      * @return объект класса User.
      */
     @PutMapping
-    public User updateUser(@Valid @RequestBody UserDto userDto, HttpServletRequest request) {
+    public User updateUser(@Valid @RequestBody User user, HttpServletRequest request) {
         log.info("Получен запрос к эндпоинту: {} {}, тело запроса {}", request.getMethod(),
-                    request.getRequestURI(), userDto);
-        User user = userService.updateUser(userDto);
-        log.info("Пользователь: {} успешно обновлен", userDto);
-        return user;
+                    request.getRequestURI(), user);
+        User upUser = userService.updateUser(user);
+        log.info("Пользователь: {} успешно обновлен", user);
+        return upUser;
     }
 
     //TODO дописать доку
