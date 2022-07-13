@@ -1,8 +1,6 @@
 package ru.yandex.practicum.filmorate.storage.film;
 
 import ru.yandex.practicum.filmorate.model.Film;
-import ru.yandex.practicum.filmorate.model.Genre;
-import ru.yandex.practicum.filmorate.model.MpaRating;
 
 import java.util.Collection;
 import java.util.List;
@@ -18,17 +16,11 @@ public interface FilmStorage {
 
     Film updateFilm(Film film);
 
+    void deleteById(Long id);
+
     void likeFilm(Long filmId, Long userId);
 
     void unlikeFilm(Long filmId, Long userId);
 
     Collection<Film> getPopular(Integer count);
-
-    MpaRating getMpaRatingById(int id);
-
-    Collection<MpaRating> getAllMpa();
-
-    Genre getGenreById(int id);
-
-    Collection<Genre> getAllGenres();
 }

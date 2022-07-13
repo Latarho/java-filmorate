@@ -91,6 +91,13 @@ public class UserService {
         }
     }
 
+    public void deleteById(Long id) {
+        if (id <= 0) {
+            throw new ValidationException("Передан некорректный Id пользователя.");
+        }
+        userStorage.deleteById(id);
+    }
+
     public void addFriend(Long userId, Long friendId) {
         if (userId <= 0 || friendId <= 0) {
             throw new DataNotFoundException("Передан некорректный Id пользователя.");

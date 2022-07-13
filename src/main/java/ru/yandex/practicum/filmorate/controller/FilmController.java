@@ -82,6 +82,14 @@ public class FilmController {
     }
 
     //TODO дописать доку
+    @DeleteMapping("/{id}")
+    public void deleteById(@PathVariable Long id, HttpServletRequest request) {
+        log.info("Получен запрос к эндпоинту: {} {}", request.getMethod(), request.getRequestURI());
+        filmService.deleteById(id);
+        log.info("Фильм успешно удален: {}", id);
+    }
+
+    //TODO дописать доку
     @PutMapping("/{filmId}/like/{userId}")
     public void likeFilm(@PathVariable Long filmId, @PathVariable Long userId, HttpServletRequest request) {
         log.info("Получен запрос к эндпоинту: {} {}", request.getMethod(), request.getRequestURI());

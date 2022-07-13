@@ -7,6 +7,8 @@ import ru.yandex.practicum.filmorate.exception.DataNotFoundException;
 import ru.yandex.practicum.filmorate.model.Film;
 import ru.yandex.practicum.filmorate.model.Genre;
 import ru.yandex.practicum.filmorate.storage.film.FilmStorage;
+import ru.yandex.practicum.filmorate.storage.genre.GenreStorage;
+import ru.yandex.practicum.filmorate.storage.mpa.MpaStorage;
 
 import javax.validation.ValidationException;
 import java.time.LocalDate;
@@ -20,14 +22,21 @@ import java.util.Optional;
 public class FilmService {
 
     private final FilmStorage filmStorage;
+    private final GenreStorage genreStorage;
+    private final MpaStorage mpaStorage;
     private final UserService userService;
 
     private Long id = 1L;
 
     // Сообщаем Spring, что нужно передать в конструктор объект класса UserStorage
     @Autowired
-    public FilmService(@Qualifier("filmDbStorage") FilmStorage filmStorage, UserService userService) {
+    public FilmService(@Qualifier("filmDbStorage") FilmStorage filmStorage,
+                       @Qualifier("genreDbStorage") GenreStorage genreStorage,
+                       @Qualifier("mpaDbStorage") MpaStorage mpaStorage,
+                       UserService userService) {
         this.filmStorage = filmStorage;
+        this.genreStorage = genreStorage;
+        this.mpaStorage = mpaStorage;
         this.userService = userService;
     }
 
@@ -51,7 +60,7 @@ public class FilmService {
                     .releaseDate(filmReleaseDate)
                     .duration(film.getDuration())
                     .rate(film.getRate())
-                    .mpa(filmStorage.getMpaRatingById(film.getMpa().getId()))
+                    .mpa(mpaStorage.getMpaRatingById(film.getMpa().getId()))
                     .genres(createGenreList(film))
                     .build();
             filmStorage.addFilm(filmAdd);
@@ -89,7 +98,7 @@ public class FilmService {
                         .releaseDate(filmReleaseDay)
                         .duration(film.getDuration())
                         .rate(film.getRate())
-                        .mpa(filmStorage.getMpaRatingById(film.getMpa().getId()))
+                        .mpa(mpaStorage.getMpaRatingById(film.getMpa().getId()))
                         .genres(createGenreList(film))
                         .build();
                 return filmStorage.updateFilm(filmEdit);
@@ -98,6 +107,13 @@ public class FilmService {
         } else {
             throw new ValidationException("Валидация не пройдена или указан некорректный Id.");
         }
+    }
+
+    public void deleteById(Long id) {
+        Optional<Film> filmFromStorage = filmStorage.getFilmById(id);
+        if (filmFromStorage.isPresent()) {
+            filmStorage.deleteById(id);
+        } else throw new DataNotFoundException("Фильм не найден.");
     }
 
     public void likeFilm(Long filmId, Long userId) {
@@ -126,7 +142,7 @@ public class FilmService {
         if (film.getGenres().isEmpty()) return new HashSet<>();
         HashSet<Genre> genres = new HashSet<>();
         for (Genre g : film.getGenres()) {
-            genres.add(filmStorage.getGenreById(g.getId()));
+            genres.add(genreStorage.getGenreById(g.getId()));
         }
         return genres;
     }
