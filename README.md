@@ -18,11 +18,11 @@ __Get film by ID__
 FROM Films
 WHERE id = n;`
 
-__Get films by mpaa_rating__
+__Get films by mpa_rating__
 
 `SELECT * 
 FROM Films
-WHERE mpaa_rating = ‘G’;`
+WHERE mpa_rating = ‘G’;`
 
 __Get films by genre__
 

@@ -1,44 +1,51 @@
 package ru.yandex.practicum.filmorate.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import ru.yandex.practicum.filmorate.exception.DataNotFoundException;
 import ru.yandex.practicum.filmorate.model.User;
-import ru.yandex.practicum.filmorate.model.UserDto;
-import ru.yandex.practicum.filmorate.storage.UserStorage;
+import ru.yandex.practicum.filmorate.storage.user.UserStorage;
+import ru.yandex.practicum.filmorate.storage.userFriendship.UserFriendshipStorage;
 
 import javax.validation.ValidationException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
+//TODO Доделать!
 // Аннотация указывает, что класс нужно добавить в контекст
 @Service
 public class UserService {
+
     private final UserStorage userStorage;
+    private final UserFriendshipStorage userFriendshipStorage;
     private Long id = 1L;
 
     // Сообщаем Spring, что нужно передать в конструктор объект класса UserStorage
     @Autowired
-    public UserService(UserStorage userStorage) {
+    public UserService(@Qualifier("userDbStorage") UserStorage userStorage,
+                       @Qualifier("userFriendshipDbStorage") UserFriendshipStorage userFriendshipStorage) {
         this.userStorage = userStorage;
+        this.userFriendshipStorage = userFriendshipStorage;
     }
 
-    public User createUser(UserDto userDto) {
-        String userName = validationUser(userDto);
+    public User createUser(User user) {
+        String userName = validationUser(user);
 
-        for (User user : userStorage.getAllUsers()) {
-            if (user.getEmail().equals(userDto.getEmail()) || user.getLogin().equals(userDto.getLogin())) {
+        for (User u : userStorage.getAllUsers()) {
+            if (u.getEmail().equals(user.getEmail()) || u.getLogin().equals(user.getLogin())) {
                 throw new ValidationException("Эмейл или логин уже уже используются.");
             }
         }
 
-        LocalDate userBirthday = LocalDate.parse(userDto.getBirthday());
+        LocalDate userBirthday = user.getBirthday();
         User userBuild = User.builder()
                 .id(generateId())
-                .email(userDto.getEmail())
-                .login(userDto.getLogin())
+                .email(user.getEmail())
+                .login(user.getLogin())
                 .name(userName)
                 .birthday(userBirthday)
                 .build();
@@ -51,62 +58,51 @@ public class UserService {
         return user.orElseThrow(() -> new DataNotFoundException("Пользователь c Id: " + id + "не найден."));
     }
 
-
     public List<User> getAllUsers() {
         return userStorage.getAllUsers();
     }
 
-    public User updateUser(UserDto userDto) {
-        User userBuild;
-
-        if (userDto.getId() != null) {
-            Optional<User> userFromStorage = userStorage.getUserById(userDto.getId());
-            userFromStorage.orElseThrow(() -> new DataNotFoundException("Пользователь: " + userDto + "не найден."));
-                String name = validationUser(userDto);
-                if (!userFromStorage.get().getEmail().equals(userDto.getEmail()) ||
-                        !userFromStorage.get().getLogin().equals(userDto.getLogin())) {
-                    for (User user : userStorage.getAllUsers()) {
-                        if (user.getEmail().equals(userDto.getEmail()) ||
-                                user.getLogin().equals(userDto.getLogin())) {
-                            if (!user.getId().equals(userFromStorage.get().getId()))
+    public User updateUser(User user) {
+        if (user.getId() != null) {
+            Optional<User> userFromStorage = userStorage.getUserById(user.getId());
+            userFromStorage.orElseThrow(() -> new DataNotFoundException("Пользователь: " + user + "не найден."));
+                String name = validationUser(user);
+                if (!userFromStorage.get().getEmail().equals(user.getEmail()) ||
+                        !userFromStorage.get().getLogin().equals(user.getLogin())) {
+                    for (User u : userStorage.getAllUsers()) {
+                        if (u.getEmail().equals(user.getEmail()) || u.getLogin().equals(user.getLogin())) {
+                            if (!u.getId().equals(userFromStorage.get().getId()))
                                 throw new ValidationException("Эмейл или логин уже уже используются.");
                         }
                     }
                 }
 
-                LocalDate userBirthday = LocalDate.parse(userDto.getBirthday());
-                userBuild = User.builder()
-                        .id(userDto.getId())
-                        .email(userDto.getEmail())
-                        .login(userDto.getLogin())
+                LocalDate userBirthday = user.getBirthday();
+                User userUpdate = User.builder()
+                        .id(user.getId())
+                        .email(user.getEmail())
+                        .login(user.getLogin())
                         .name(name)
                         .birthday(userBirthday)
                         .build();
-                User userToAddFriends = userFromStorage.get();
-                userBuild.setFriends(userToAddFriends.getFriends());
-                userStorage.createUser(userBuild);
+                return userStorage.updateUser(userUpdate);
         } else {
             throw new ValidationException("Указан некорректный Id.");
         }
-        return userBuild;
+    }
+
+    public void deleteById(Long id) {
+        if (id <= 0) {
+            throw new ValidationException("Передан некорректный Id пользователя.");
+        }
+        userStorage.deleteById(id);
     }
 
     public void addFriend(Long userId, Long friendId) {
         if (userId <= 0 || friendId <= 0) {
-            // В тестах постман здесь ожидается статус код 404, однако по факту эта операция соответсвует 400 коду, следовательно здесь должен быть ValidationException.
-            // Переделать тесты в постмане.
             throw new DataNotFoundException("Передан некорректный Id пользователя.");
         }
-
-        Optional<User> userFromStorage = userStorage.getUserById(userId);
-        Optional<User> friendFromStorage = userStorage.getUserById(friendId);
-        if (userFromStorage.isPresent() && friendFromStorage.isPresent()) {
-            User user = userFromStorage.get();
-            user.addFriend(friendId);
-            User friend = friendFromStorage.get();
-            friend.addFriend(userId);
-        } else
-            throw new DataNotFoundException("Пользователь не найден.");
+        userFriendshipStorage.addFriend(userId, friendId);
     }
 
     public void deleteFriend(Long userId, Long friendId) {
@@ -114,32 +110,23 @@ public class UserService {
             throw new ValidationException("Передан некорректный Id пользователя.");
         }
 
-        Optional<User> userFromStorage = userStorage.getUserById(userId);
-        Optional<User> friendFromStorage = userStorage.getUserById(friendId);
-        if (userFromStorage.isPresent() && friendFromStorage.isPresent()) {
-            User user = userFromStorage.get();
-            user.removeFriend(friendId);
-            User friend = friendFromStorage.get();
-            friend.removeFriend(userId);
-        } else
-            throw new DataNotFoundException("Пользователь не найден.");
+        userFriendshipStorage.deleteFriend(userId, friendId);
     }
 
     public List<User> getUserFriends (Long userId) {
         if (userId <=0) {
             throw new ValidationException("Передан некорректный Id пользователя.");
         }
-
-        ArrayList<User> userFriends = new ArrayList<>();
-        Optional<User> userFromStorage = userStorage.getUserById(userId);
-        if (userFromStorage.isPresent()) {
-            User user = userFromStorage.get();
-            for (Long id : user.getFriends()) {
-                    userFriends.add(userStorage.getUserById(id).get());
+        List<Long> friends = userFriendshipStorage.getUserFriends(userId);
+        if (friends.isEmpty()) {
+            return List.of();
+        } else {
+            List<User> userFriends = new ArrayList<>();
+            for (Long id : friends) {
+                userFriends.add(getUserById(id));
             }
             return userFriends;
-        } else
-            throw new DataNotFoundException("Пользователь не найден.");
+        }
     }
 
     public List<User> getCommonFriends(Long userId, Long otherId) {
@@ -147,33 +134,39 @@ public class UserService {
             throw new ValidationException("Передан некорректный Id пользователя.");
         }
 
-        Optional<User> userFromStorage = userStorage.getUserById(userId);
-        Optional<User> maybeOtherUser = userStorage.getUserById(otherId);
-        if (userFromStorage.isPresent() && maybeOtherUser.isPresent()) {
-            List<User> userFriends = getUserFriends(userId);
-            List<User> otherUserFriends = getUserFriends(otherId);
-            userFriends.retainAll(otherUserFriends);
-            return userFriends;
+        List<Long> userFromStorage = userFriendshipStorage.getUserFriends(userId);
+        List<Long> otherUserFromStorage = userFriendshipStorage.getUserFriends(otherId);
+
+        List<Long> friends = userFromStorage.stream()
+                .distinct().filter(otherUserFromStorage::contains).collect(Collectors.toList());
+
+        if (friends.isEmpty()) {
+            return List.of();
+        } else {
+            List<User> commonFriends = new ArrayList<>();
+            for (Long id : friends) {
+                commonFriends.add(getUserById(id));
+            }
+            return commonFriends;
         }
-        throw new DataNotFoundException("Пользователь не найден.");
     }
 
     /**
      * Валидация экземпляра класса User.
      *
-     * @param userDto объект класса User (из тела запроса).
+     * @param user объект класса User (из тела запроса).
      * @return Name пользователя.
      */
-    public String validationUser(UserDto userDto) {
-        LocalDate userBirthday = LocalDate.parse(userDto.getBirthday());
+    public String validationUser(User user) {
+        LocalDate userBirthday = user.getBirthday();
         if (userBirthday.isAfter(LocalDate.now()))
             throw new ValidationException("Дата рождения пользователя должна быть раньше текущей даты.");
 
         String name;
-        if (userDto.getName().isEmpty()) {
-            name = userDto.getLogin();
+        if (user.getName().isEmpty()) {
+            name = user.getLogin();
         } else {
-            name = userDto.getName();
+            name = user.getName();
         }
         return name;
     }

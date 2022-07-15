@@ -4,7 +4,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import ru.yandex.practicum.filmorate.model.User;
-import ru.yandex.practicum.filmorate.model.UserDto;
 import ru.yandex.practicum.filmorate.service.UserService;
 
 import javax.servlet.http.HttpServletRequest;
@@ -26,16 +25,16 @@ public class UserController {
     /**
      * Создание нового пользователя.
      *
-     * @param userDto объект класса User (из тела запроса).
+     * @param user объект класса User (из тела запроса).
      * @param request запрос.
      * @return объект класса User.
      */
     @PostMapping
-    public User createUser(@Valid @RequestBody UserDto userDto, HttpServletRequest request) {
+    public User createUser(@Valid @RequestBody User user, HttpServletRequest request) {
         log.info("Получен запрос к эндпоинту: {} {}, тело запроса {}", request.getMethod(),
-                request.getRequestURI(), userDto);
-        User newUser = userService.createUser(userDto);
-        log.info("Пользователь: {} успешно создан", userDto.getLogin());
+                request.getRequestURI(), user);
+        User newUser = userService.createUser(user);
+        log.info("Пользователь: {} успешно создан", user.getLogin());
         return newUser;
     }
 
@@ -72,24 +71,31 @@ public class UserController {
     /**
      * Обновление существующего пользователя.
      *
-     * @param userDto объект класса User (из тела запроса).
+     * @param user объект класса User (из тела запроса).
      * @param request запрос.
      * @return объект класса User.
      */
     @PutMapping
-    public User updateUser(@Valid @RequestBody UserDto userDto, HttpServletRequest request) {
+    public User updateUser(@Valid @RequestBody User user, HttpServletRequest request) {
         log.info("Получен запрос к эндпоинту: {} {}, тело запроса {}", request.getMethod(),
-                    request.getRequestURI(), userDto);
-        User user = userService.updateUser(userDto);
-        log.info("Пользователь: {} успешно обновлен", userDto);
-        return user;
+                    request.getRequestURI(), user);
+        User upUser = userService.updateUser(user);
+        log.info("Пользователь: {} успешно обновлен", user);
+        return upUser;
+    }
+
+    //TODO дописать доку
+    @DeleteMapping("/{id}")
+    public void deleteById(@PathVariable Long id, HttpServletRequest request) {
+        log.info("Получен запрос к эндпоинту: {} {}", request.getMethod(), request.getRequestURI());
+        userService.deleteById(id);
+        log.info("Пользователь: {} успешно удален", id);
     }
 
     //TODO дописать доку
     @PutMapping("{userId}/friends/{friendId}")
     public void addFriend(@PathVariable Long userId, @PathVariable Long friendId, HttpServletRequest request) {
-        log.info("Получен запрос к эндпоинту: {} {}", request.getMethod(),
-                request.getRequestURI());
+        log.info("Получен запрос к эндпоинту: {} {}", request.getMethod(), request.getRequestURI());
         userService.addFriend(userId, friendId);
         log.info("Пользователь: {} успешно добавил в друзья пользователя: {}", userId, friendId);
     }
@@ -97,8 +103,7 @@ public class UserController {
     //TODO дописать доку
     @DeleteMapping("{userId}/friends/{friendId}")
     public void deleteFriend(@PathVariable Long userId, @PathVariable Long friendId, HttpServletRequest request) {
-        log.info("Получен запрос к эндпоинту: {} {}", request.getMethod(),
-                request.getRequestURI());
+        log.info("Получен запрос к эндпоинту: {} {}", request.getMethod(), request.getRequestURI());
         userService.deleteFriend(userId, friendId);
         log.info("Пользователь: {} успешно удален", userId);
     }
@@ -106,8 +111,7 @@ public class UserController {
     //TODO дописать доку
     @GetMapping("{userId}/friends")
     public List<User> findFriends(@PathVariable Long userId, HttpServletRequest request) {
-        log.info("Получен запрос к эндпоинту: {} {}", request.getMethod(),
-                request.getRequestURI());
+        log.info("Получен запрос к эндпоинту: {} {}", request.getMethod(), request.getRequestURI());
         List<User> friendsList = userService.getUserFriends(userId);
         log.info("В списке friendsList содержится {} пользователей", friendsList.size());
         return friendsList;
@@ -116,8 +120,7 @@ public class UserController {
     //TODO дописать доку
     @GetMapping("{userId}/friends/common/{otherId}")
     public List<User> findCommonFriends(@PathVariable Long userId, @PathVariable Long otherId, HttpServletRequest request) {
-        log.info("Получен запрос к эндпоинту: {} {}", request.getMethod(),
-                request.getRequestURI());
+        log.info("Получен запрос к эндпоинту: {} {}", request.getMethod(), request.getRequestURI());
         List<User> commonFriendsList = userService.getCommonFriends(userId, otherId);
         log.info("В списке commonFriendsList содержится {} пользователей", commonFriendsList.size());
         return commonFriendsList;

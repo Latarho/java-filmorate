@@ -1,0 +1,2112 @@
+{
+	"id": "c9989e5a-cd17-4592-b7f0-97db06b73e96",
+	"name": "API Test Sprint 4",
+	"timestamp": "2022-07-13T19:21:54.992Z",
+	"collection_id": "10543289-bc9cb94d-7862-4cfe-927e-c5fddd4bd3e0",
+	"folder_id": 0,
+	"environment_id": "0",
+	"totalPass": 99,
+	"totalFail": 0,
+	"results": [
+		{
+			"id": "16cfe7a8-6919-412c-a7f1-718749450d17",
+			"name": "User Create",
+			"url": "http://localhost:8080/users",
+			"time": 443,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true,
+				"Test create user": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Test create user": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				443
+			],
+			"allTests": [
+				{
+					"Status code is 200": true,
+					"Test create user": true
+				}
+			]
+		},
+		{
+			"id": "30d4622d-7920-4091-aff3-1f70f1b71b32",
+			"name": "User create Fail login",
+			"url": "http://localhost:8080/users",
+			"time": 48,
+			"responseCode": {
+				"code": 500,
+				"name": "Internal Server Error"
+			},
+			"tests": {
+				"Status code is 500 or 400": true
+			},
+			"testPassFailCounts": {
+				"Status code is 500 or 400": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				48
+			],
+			"allTests": [
+				{
+					"Status code is 500 or 400": true
+				}
+			]
+		},
+		{
+			"id": "06b9ee35-a600-452b-af4c-01aee9b347ba",
+			"name": "User create Fail birthday",
+			"url": "http://localhost:8080/users",
+			"time": 29,
+			"responseCode": {
+				"code": 400,
+				"name": "Bad Request"
+			},
+			"tests": {
+				"Status code is 500 or 400": true
+			},
+			"testPassFailCounts": {
+				"Status code is 500 or 400": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				29
+			],
+			"allTests": [
+				{
+					"Status code is 500 or 400": true
+				}
+			]
+		},
+		{
+			"id": "402bb554-91f5-4fe2-9d1d-9b255b4cf0a3",
+			"name": "User create Fail email",
+			"url": "http://localhost:8080/users",
+			"time": 16,
+			"responseCode": {
+				"code": 500,
+				"name": "Internal Server Error"
+			},
+			"tests": {
+				"Status code is 500 or 400": true
+			},
+			"testPassFailCounts": {
+				"Status code is 500 or 400": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				16
+			],
+			"allTests": [
+				{
+					"Status code is 500 or 400": true
+				}
+			]
+		},
+		{
+			"id": "dc7da2f8-fd3d-46b1-a075-55a403fb03af",
+			"name": "User update",
+			"url": "http://localhost:8080/users",
+			"time": 17,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true,
+				"Test update user": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Test update user": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				17
+			],
+			"allTests": [
+				{
+					"Status code is 200": true,
+					"Test update user": true
+				}
+			]
+		},
+		{
+			"id": "5153e50d-65f7-4661-96a2-59cc954cf21f",
+			"name": "User update unknown",
+			"url": "http://localhost:8080/users",
+			"time": 11,
+			"responseCode": {
+				"code": 404,
+				"name": "Not Found"
+			},
+			"tests": {
+				"Status code is 404": true
+			},
+			"testPassFailCounts": {
+				"Status code is 404": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				11
+			],
+			"allTests": [
+				{
+					"Status code is 404": true
+				}
+			]
+		},
+		{
+			"id": "b51f2278-54ae-40c6-a8f2-083a930524fa",
+			"name": "User All",
+			"url": "http://localhost:8080/users",
+			"time": 14,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true,
+				"Test list user": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Test list user": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				14
+			],
+			"allTests": [
+				{
+					"Status code is 200": true,
+					"Test list user": true
+				}
+			]
+		},
+		{
+			"id": "0957dc6b-def6-4cc7-b5ef-0fae012daa74",
+			"name": "Friend Create",
+			"url": "http://localhost:8080/users",
+			"time": 14,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true,
+				"Test create friend": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Test create friend": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				14
+			],
+			"allTests": [
+				{
+					"Status code is 200": true,
+					"Test create friend": true
+				}
+			]
+		},
+		{
+			"id": "42625d89-1748-4c54-bd38-657fb2631a30",
+			"name": "Common Friend Create",
+			"url": "http://localhost:8080/users",
+			"time": 18,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true,
+				"Test empty name": true,
+				"Test create common friend": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Test empty name": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Test create common friend": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				18
+			],
+			"allTests": [
+				{
+					"Status code is 200": true,
+					"Test empty name": true,
+					"Test create common friend": true
+				}
+			]
+		},
+		{
+			"id": "b3b9659e-8179-4210-acbb-55d146fff5c4",
+			"name": "User get",
+			"url": "http://localhost:8080/users/1",
+			"time": 15,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true,
+				"Test get user": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Test get user": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				15
+			],
+			"allTests": [
+				{
+					"Status code is 200": true,
+					"Test get user": true
+				}
+			]
+		},
+		{
+			"id": "e9b750ac-c49b-43d7-b5bd-e45f0846eba1",
+			"name": "User get unknown",
+			"url": "http://localhost:8080/users/-1",
+			"time": 9,
+			"responseCode": {
+				"code": 404,
+				"name": "Not Found"
+			},
+			"tests": {
+				"Status code is 404": true
+			},
+			"testPassFailCounts": {
+				"Status code is 404": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				9
+			],
+			"allTests": [
+				{
+					"Status code is 404": true
+				}
+			]
+		},
+		{
+			"id": "cf34d1de-b3ab-4ebe-962d-a8952a7ef78f",
+			"name": "Friend get",
+			"url": "http://localhost:8080/users/2",
+			"time": 8,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true,
+				"Test get friend": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Test get friend": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				8
+			],
+			"allTests": [
+				{
+					"Status code is 200": true,
+					"Test get friend": true
+				}
+			]
+		},
+		{
+			"id": "e764e0cb-df9c-4904-9d98-237772f1f1f2",
+			"name": "User get friends common empty",
+			"url": "http://localhost:8080/users/1/friends/common/2",
+			"time": 16,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true,
+				"Test get common friend": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Test get common friend": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				16
+			],
+			"allTests": [
+				{
+					"Status code is 200": true,
+					"Test get common friend": true
+				}
+			]
+		},
+		{
+			"id": "b543070e-75d2-4760-8913-455433924c4c",
+			"name": "User add friend",
+			"url": "http://localhost:8080/users/1/friends/2",
+			"time": 16,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				16
+			],
+			"allTests": [
+				{
+					"Status code is 200": true
+				}
+			]
+		},
+		{
+			"id": "e79d9270-800e-49c6-a94e-faed08819457",
+			"name": "User add friend unknown",
+			"url": "http://localhost:8080/users/1/friends/-1",
+			"time": 11,
+			"responseCode": {
+				"code": 404,
+				"name": "Not Found"
+			},
+			"tests": {
+				"Status code is 404": true
+			},
+			"testPassFailCounts": {
+				"Status code is 404": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				11
+			],
+			"allTests": [
+				{
+					"Status code is 404": true
+				}
+			]
+		},
+		{
+			"id": "8edc585f-8944-493a-a291-41b966a17940",
+			"name": "User get friends",
+			"url": "http://localhost:8080/users/1/friends",
+			"time": 10,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true,
+				"Test user friends": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Test user friends": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				10
+			],
+			"allTests": [
+				{
+					"Status code is 200": true,
+					"Test user friends": true
+				}
+			]
+		},
+		{
+			"id": "ca363c24-bb62-4517-8bba-22b47236257b",
+			"name": "Friend get friends",
+			"url": "http://localhost:8080/users/2/friends",
+			"time": 10,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true,
+				"Test user friends": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Test user friends": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				10
+			],
+			"allTests": [
+				{
+					"Status code is 200": true,
+					"Test user friends": true
+				}
+			]
+		},
+		{
+			"id": "5a966de3-45f4-43ea-be9b-aa07c9b9b065",
+			"name": "User get friends mutual",
+			"url": "http://localhost:8080/users/1/friends/common/2",
+			"time": 10,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true,
+				"Test user mutual friends": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Test user mutual friends": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				10
+			],
+			"allTests": [
+				{
+					"Status code is 200": true,
+					"Test user mutual friends": true
+				}
+			]
+		},
+		{
+			"id": "f2da6785-7efb-45fa-8f6b-e2bcaa68e09f",
+			"name": "User add common friend",
+			"url": "http://localhost:8080/users/1/friends/3",
+			"time": 9,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				9
+			],
+			"allTests": [
+				{
+					"Status code is 200": true
+				}
+			]
+		},
+		{
+			"id": "694f0745-c548-46af-bacf-a88135f3d58d",
+			"name": "User get 2 friends",
+			"url": "http://localhost:8080/users/1/friends",
+			"time": 10,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true,
+				"Test user 2 friends": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Test user 2 friends": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				10
+			],
+			"allTests": [
+				{
+					"Status code is 200": true,
+					"Test user 2 friends": true
+				}
+			]
+		},
+		{
+			"id": "44d29868-973e-4947-8946-95cda9c20abe",
+			"name": "Friend add common friend",
+			"url": "http://localhost:8080/users/2/friends/3",
+			"time": 10,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				10
+			],
+			"allTests": [
+				{
+					"Status code is 200": true
+				}
+			]
+		},
+		{
+			"id": "5941d51f-7f5a-45c8-85be-498a902eea98",
+			"name": "Friend get 1 friends",
+			"url": "http://localhost:8080/users/2/friends",
+			"time": 8,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true,
+				"Test friend friends": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Test friend friends": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				8
+			],
+			"allTests": [
+				{
+					"Status code is 200": true,
+					"Test friend friends": true
+				}
+			]
+		},
+		{
+			"id": "576f459d-819a-4aa8-9c8e-e4bd99cce3b7",
+			"name": "User get friends common",
+			"url": "http://localhost:8080/users/1/friends/common/2",
+			"time": 11,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true,
+				"Test get common friend": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Test get common friend": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				11
+			],
+			"allTests": [
+				{
+					"Status code is 200": true,
+					"Test get common friend": true
+				}
+			]
+		},
+		{
+			"id": "b184c174-a641-4c67-968d-8f75f1e33bb5",
+			"name": "User remove friend",
+			"url": "http://localhost:8080/users/1/friends/2",
+			"time": 15,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				15
+			],
+			"allTests": [
+				{
+					"Status code is 200": true
+				}
+			]
+		},
+		{
+			"id": "e63faae6-f93b-40a3-b8e0-84396d3f452c",
+			"name": "User get friends common",
+			"url": "http://localhost:8080/users/1/friends/common/2",
+			"time": 12,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true,
+				"Test get common friend": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Test get common friend": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				12
+			],
+			"allTests": [
+				{
+					"Status code is 200": true,
+					"Test get common friend": true
+				}
+			]
+		},
+		{
+			"id": "b971c66d-61fb-41b2-9f20-db3a1fee88b3",
+			"name": "Friend get friends common",
+			"url": "http://localhost:8080/users/2/friends/common/1",
+			"time": 12,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true,
+				"Test get common friend": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Test get common friend": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				12
+			],
+			"allTests": [
+				{
+					"Status code is 200": true,
+					"Test get common friend": true
+				}
+			]
+		},
+		{
+			"id": "d1711d58-17bb-4d45-a226-6b1f606fbc6d",
+			"name": "User get 1 friends",
+			"url": "http://localhost:8080/users/1/friends",
+			"time": 11,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true,
+				"Test user 2 friends": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Test user 2 friends": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				11
+			],
+			"allTests": [
+				{
+					"Status code is 200": true,
+					"Test user 2 friends": true
+				}
+			]
+		},
+		{
+			"id": "2f7e69ee-eacd-4dd6-960f-d8161827cc50",
+			"name": "Film get All",
+			"url": "http://localhost:8080/films",
+			"time": 10,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true,
+				"Test count films": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Test count films": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				10
+			],
+			"allTests": [
+				{
+					"Status code is 200": true,
+					"Test count films": true
+				}
+			]
+		},
+		{
+			"id": "1cf514a4-c1b5-44a7-93a5-c8145087339e",
+			"name": "Film create",
+			"url": "http://localhost:8080/films",
+			"time": 60,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true,
+				"Test created film": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Test created film": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				60
+			],
+			"allTests": [
+				{
+					"Status code is 200": true,
+					"Test created film": true
+				}
+			]
+		},
+		{
+			"id": "3135a8a6-98f7-4c4d-94ea-85fab1952e6d",
+			"name": "Film create Fail name",
+			"url": "http://localhost:8080/films",
+			"time": 12,
+			"responseCode": {
+				"code": 500,
+				"name": "Internal Server Error"
+			},
+			"tests": {
+				"Status code is 500 or 400": true
+			},
+			"testPassFailCounts": {
+				"Status code is 500 or 400": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				12
+			],
+			"allTests": [
+				{
+					"Status code is 500 or 400": true
+				}
+			]
+		},
+		{
+			"id": "fca7aff3-996f-4cad-8dc5-a70c52b32236",
+			"name": "Film create Fail description",
+			"url": "http://localhost:8080/films",
+			"time": 11,
+			"responseCode": {
+				"code": 500,
+				"name": "Internal Server Error"
+			},
+			"tests": {
+				"Status code is 500 or 400": true
+			},
+			"testPassFailCounts": {
+				"Status code is 500 or 400": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				11
+			],
+			"allTests": [
+				{
+					"Status code is 500 or 400": true
+				}
+			]
+		},
+		{
+			"id": "4592b588-897c-4d5c-8722-8b7ce6c4e2ca",
+			"name": "Film create Fail releaseDate",
+			"url": "http://localhost:8080/films",
+			"time": 10,
+			"responseCode": {
+				"code": 400,
+				"name": "Bad Request"
+			},
+			"tests": {
+				"Status code is 500 or 400": true
+			},
+			"testPassFailCounts": {
+				"Status code is 500 or 400": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				10
+			],
+			"allTests": [
+				{
+					"Status code is 500 or 400": true
+				}
+			]
+		},
+		{
+			"id": "266e453f-584c-406a-9900-69f742e7bb89",
+			"name": "Film create Fail duration",
+			"url": "http://localhost:8080/films",
+			"time": 14,
+			"responseCode": {
+				"code": 400,
+				"name": "Bad Request"
+			},
+			"tests": {
+				"Status code is 500 or 400": true
+			},
+			"testPassFailCounts": {
+				"Status code is 500 or 400": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				14
+			],
+			"allTests": [
+				{
+					"Status code is 500 or 400": true
+				}
+			]
+		},
+		{
+			"id": "3bba7676-5585-49cc-85d4-49c87ad42bf4",
+			"name": "Film create Fail MPA",
+			"url": "http://localhost:8080/films",
+			"time": 18,
+			"responseCode": {
+				"code": 400,
+				"name": "Bad Request"
+			},
+			"tests": {
+				"Status code is 500 or 400": true
+			},
+			"testPassFailCounts": {
+				"Status code is 500 or 400": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				18
+			],
+			"allTests": [
+				{
+					"Status code is 500 or 400": true
+				}
+			]
+		},
+		{
+			"id": "84e06e25-0bbc-4a2b-8f58-f5385d555da6",
+			"name": "Film update",
+			"url": "http://localhost:8080/films",
+			"time": 25,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true,
+				"Test updated film": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Test updated film": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				25
+			],
+			"allTests": [
+				{
+					"Status code is 200": true,
+					"Test updated film": true
+				}
+			]
+		},
+		{
+			"id": "cc8c105f-6488-49f3-ada6-247b603369f4",
+			"name": "Film update unknown",
+			"url": "http://localhost:8080/films",
+			"time": 10,
+			"responseCode": {
+				"code": 404,
+				"name": "Not Found"
+			},
+			"tests": {
+				"Status code is 404": true
+			},
+			"testPassFailCounts": {
+				"Status code is 404": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				10
+			],
+			"allTests": [
+				{
+					"Status code is 404": true
+				}
+			]
+		},
+		{
+			"id": "62856a1c-d3d8-4953-a793-e9b9f5589e27",
+			"name": "Film get Popular",
+			"url": "http://localhost:8080/films/popular",
+			"time": 18,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true,
+				"Test popular film": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Test popular film": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				18
+			],
+			"allTests": [
+				{
+					"Status code is 200": true,
+					"Test popular film": true
+				}
+			]
+		},
+		{
+			"id": "bcf90947-94e1-4917-b349-dc1dd559885e",
+			"name": "Film create Firend",
+			"url": "http://localhost:8080/films",
+			"time": 23,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true,
+				"Test email": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Test email": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				23
+			],
+			"allTests": [
+				{
+					"Status code is 200": true,
+					"Test email": true
+				}
+			]
+		},
+		{
+			"id": "46a0c0c4-d920-42c8-8412-014c635de2ab",
+			"name": "Film get",
+			"url": "http://localhost:8080/films/1",
+			"time": 10,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true,
+				"Test get film": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Test get film": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				10
+			],
+			"allTests": [
+				{
+					"Status code is 200": true,
+					"Test get film": true
+				}
+			]
+		},
+		{
+			"id": "1d58c717-ab68-40f1-bf02-87cd6936fdbb",
+			"name": "Film get unknown",
+			"url": "http://localhost:8080/films/-1",
+			"time": 10,
+			"responseCode": {
+				"code": 404,
+				"name": "Not Found"
+			},
+			"tests": {
+				"Status code is 404": true
+			},
+			"testPassFailCounts": {
+				"Status code is 404": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				10
+			],
+			"allTests": [
+				{
+					"Status code is 404": true
+				}
+			]
+		},
+		{
+			"id": "519d4dd2-b39d-4aca-945a-d7bb1fbcb42b",
+			"name": "Friend  film get",
+			"url": "http://localhost:8080/films/2",
+			"time": 11,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true,
+				"Test get film": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Test get film": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				11
+			],
+			"allTests": [
+				{
+					"Status code is 200": true,
+					"Test get film": true
+				}
+			]
+		},
+		{
+			"id": "f25daf04-26fc-448f-8f5b-e09d306df412",
+			"name": "Film add Like",
+			"url": "http://localhost:8080/films/2/like/1",
+			"time": 16,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				16
+			],
+			"allTests": [
+				{
+					"Status code is 200": true
+				}
+			]
+		},
+		{
+			"id": "9fec8fc6-b55b-47a0-b4a0-99fb2b17f027",
+			"name": "Film get Popular count",
+			"url": "http://localhost:8080/films/popular?count=1",
+			"time": 10,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true,
+				"Test popular": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Test popular": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				10
+			],
+			"allTests": [
+				{
+					"Status code is 200": true,
+					"Test popular": true
+				}
+			]
+		},
+		{
+			"id": "39f917e5-122f-473a-8d75-9d49198cc95a",
+			"name": "Film remove Like",
+			"url": "http://localhost:8080/films/2/like/1",
+			"time": 14,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				14
+			],
+			"allTests": [
+				{
+					"Status code is 200": true
+				}
+			]
+		},
+		{
+			"id": "b00aaa23-f58e-4c64-8d1a-53883f66bc2a",
+			"name": "Film get Popular count 2",
+			"url": "http://localhost:8080/films/popular",
+			"time": 12,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true,
+				"Test popular": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Test popular": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				12
+			],
+			"allTests": [
+				{
+					"Status code is 200": true,
+					"Test popular": true
+				}
+			]
+		},
+		{
+			"id": "c3b747f1-d227-4aab-8ceb-9d5d80f1e285",
+			"name": "Film remove Like not found",
+			"url": "http://localhost:8080/films/1/like/-2",
+			"time": 10,
+			"responseCode": {
+				"code": 404,
+				"name": "Not Found"
+			},
+			"tests": {
+				"Status code is 404": true
+			},
+			"testPassFailCounts": {
+				"Status code is 404": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				10
+			],
+			"allTests": [
+				{
+					"Status code is 404": true
+				}
+			]
+		},
+		{
+			"id": "a963071d-813f-40ec-bb00-73442e283fda",
+			"name": "Mpa get",
+			"url": "http://localhost:8080/mpa/1",
+			"time": 10,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true,
+				"Test get user": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Test get user": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				10
+			],
+			"allTests": [
+				{
+					"Status code is 200": true,
+					"Test get user": true
+				}
+			]
+		},
+		{
+			"id": "cac2eaca-786b-4f38-ad7d-d196a33d7cc4",
+			"name": "Mpa get unknown",
+			"url": "http://localhost:8080/mpa/-1",
+			"time": 9,
+			"responseCode": {
+				"code": 404,
+				"name": "Not Found"
+			},
+			"tests": {
+				"Status code is 404": true
+			},
+			"testPassFailCounts": {
+				"Status code is 404": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				9
+			],
+			"allTests": [
+				{
+					"Status code is 404": true
+				}
+			]
+		},
+		{
+			"id": "776c90fe-82d2-4b94-990f-7513a0a8ee27",
+			"name": "Mpa  All",
+			"url": "http://localhost:8080/mpa",
+			"time": 10,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true,
+				"Test list user": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Test list user": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				10
+			],
+			"allTests": [
+				{
+					"Status code is 200": true,
+					"Test list user": true
+				}
+			]
+		},
+		{
+			"id": "592b9f24-672d-463e-94d6-2da3902c51e9",
+			"name": "Genre get",
+			"url": "http://localhost:8080/genres/1",
+			"time": 11,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true,
+				"Test get user": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Test get user": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				11
+			],
+			"allTests": [
+				{
+					"Status code is 200": true,
+					"Test get user": true
+				}
+			]
+		},
+		{
+			"id": "fe22153b-2a24-4374-8b2f-c77268f3caaf",
+			"name": "Genre get unknown",
+			"url": "http://localhost:8080/genres/-1",
+			"time": 10,
+			"responseCode": {
+				"code": 404,
+				"name": "Not Found"
+			},
+			"tests": {
+				"Status code is 404": true
+			},
+			"testPassFailCounts": {
+				"Status code is 404": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				10
+			],
+			"allTests": [
+				{
+					"Status code is 404": true
+				}
+			]
+		},
+		{
+			"id": "422c17b8-5012-448b-a824-e656099a8860",
+			"name": "Genre All",
+			"url": "http://localhost:8080/genres",
+			"time": 9,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true,
+				"Test list user": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Test list user": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				9
+			],
+			"allTests": [
+				{
+					"Status code is 200": true,
+					"Test list user": true
+				}
+			]
+		},
+		{
+			"id": "5875b70c-7f3c-4ec9-a634-4535ab916db4",
+			"name": "Film genre update",
+			"url": "http://localhost:8080/films",
+			"time": 20,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true,
+				"Test updated film": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Test updated film": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				20
+			],
+			"allTests": [
+				{
+					"Status code is 200": true,
+					"Test updated film": true
+				}
+			]
+		},
+		{
+			"id": "412d1e40-a9ad-450d-b2b4-376e6e2ffcb6",
+			"name": "Film get with genre",
+			"url": "http://localhost:8080/films/1",
+			"time": 7,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true,
+				"Test get film": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Test get film": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				7
+			],
+			"allTests": [
+				{
+					"Status code is 200": true,
+					"Test get film": true
+				}
+			]
+		},
+		{
+			"id": "0a7a989c-c7a4-4f3b-a050-fee07d52a0af",
+			"name": "Film update remove  genre",
+			"url": "http://localhost:8080/films",
+			"time": 15,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true,
+				"Test updated film": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Test updated film": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				15
+			],
+			"allTests": [
+				{
+					"Status code is 200": true,
+					"Test updated film": true
+				}
+			]
+		},
+		{
+			"id": "028665ab-7582-4cbe-b19d-28b06ba53fd2",
+			"name": "Film get without genre",
+			"url": "http://localhost:8080/films/1",
+			"time": 10,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true,
+				"Test get film": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Test get film": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				10
+			],
+			"allTests": [
+				{
+					"Status code is 200": true,
+					"Test get film": true
+				}
+			]
+		},
+		{
+			"id": "b980dc7a-dfe8-43d5-994a-01d41aec4aed",
+			"name": "Friend film genres update",
+			"url": "http://localhost:8080/films",
+			"time": 22,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true,
+				"Test updated film": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Test updated film": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				22
+			],
+			"allTests": [
+				{
+					"Status code is 200": true,
+					"Test updated film": true
+				}
+			]
+		},
+		{
+			"id": "67c3612e-f240-49c6-bd10-acc097ca469a",
+			"name": "Friend  film get with genre",
+			"url": "http://localhost:8080/films/2",
+			"time": 11,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true,
+				"Test get film": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Test get film": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				11
+			],
+			"allTests": [
+				{
+					"Status code is 200": true,
+					"Test get film": true
+				}
+			]
+		},
+		{
+			"id": "a9fcc6c9-2d0b-4670-906d-f7426b0ad124",
+			"name": "Friend film genres update Copy",
+			"url": "http://localhost:8080/films",
+			"time": 22,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true,
+				"Test updated film": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Test updated film": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				22
+			],
+			"allTests": [
+				{
+					"Status code is 200": true,
+					"Test updated film": true
+				}
+			]
+		},
+		{
+			"id": "265bf3bc-ac3b-45bb-9c48-b228c6883a20",
+			"name": "Friend  film get with genre Copy",
+			"url": "http://localhost:8080/films/2",
+			"time": 9,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true,
+				"Test get film": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Test get film": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				9
+			],
+			"allTests": [
+				{
+					"Status code is 200": true,
+					"Test get film": true
+				}
+			]
+		}
+	],
+	"count": 1,
+	"totalTime": 1292,
+	"collection": {
+		"requests": [
+			{
+				"id": "16cfe7a8-6919-412c-a7f1-718749450d17",
+				"method": "POST"
+			},
+			{
+				"id": "30d4622d-7920-4091-aff3-1f70f1b71b32",
+				"method": "POST"
+			},
+			{
+				"id": "06b9ee35-a600-452b-af4c-01aee9b347ba",
+				"method": "POST"
+			},
+			{
+				"id": "402bb554-91f5-4fe2-9d1d-9b255b4cf0a3",
+				"method": "POST"
+			},
+			{
+				"id": "dc7da2f8-fd3d-46b1-a075-55a403fb03af",
+				"method": "PUT"
+			},
+			{
+				"id": "5153e50d-65f7-4661-96a2-59cc954cf21f",
+				"method": "PUT"
+			},
+			{
+				"id": "b51f2278-54ae-40c6-a8f2-083a930524fa",
+				"method": "GET"
+			},
+			{
+				"id": "0957dc6b-def6-4cc7-b5ef-0fae012daa74",
+				"method": "POST"
+			},
+			{
+				"id": "42625d89-1748-4c54-bd38-657fb2631a30",
+				"method": "POST"
+			},
+			{
+				"id": "b3b9659e-8179-4210-acbb-55d146fff5c4",
+				"method": "GET"
+			},
+			{
+				"id": "e9b750ac-c49b-43d7-b5bd-e45f0846eba1",
+				"method": "GET"
+			},
+			{
+				"id": "cf34d1de-b3ab-4ebe-962d-a8952a7ef78f",
+				"method": "GET"
+			},
+			{
+				"id": "e764e0cb-df9c-4904-9d98-237772f1f1f2",
+				"method": "GET"
+			},
+			{
+				"id": "b543070e-75d2-4760-8913-455433924c4c",
+				"method": "PUT"
+			},
+			{
+				"id": "e79d9270-800e-49c6-a94e-faed08819457",
+				"method": "PUT"
+			},
+			{
+				"id": "8edc585f-8944-493a-a291-41b966a17940",
+				"method": "GET"
+			},
+			{
+				"id": "ca363c24-bb62-4517-8bba-22b47236257b",
+				"method": "GET"
+			},
+			{
+				"id": "5a966de3-45f4-43ea-be9b-aa07c9b9b065",
+				"method": "GET"
+			},
+			{
+				"id": "f2da6785-7efb-45fa-8f6b-e2bcaa68e09f",
+				"method": "PUT"
+			},
+			{
+				"id": "694f0745-c548-46af-bacf-a88135f3d58d",
+				"method": "GET"
+			},
+			{
+				"id": "44d29868-973e-4947-8946-95cda9c20abe",
+				"method": "PUT"
+			},
+			{
+				"id": "5941d51f-7f5a-45c8-85be-498a902eea98",
+				"method": "GET"
+			},
+			{
+				"id": "576f459d-819a-4aa8-9c8e-e4bd99cce3b7",
+				"method": "GET"
+			},
+			{
+				"id": "b184c174-a641-4c67-968d-8f75f1e33bb5",
+				"method": "DELETE"
+			},
+			{
+				"id": "e63faae6-f93b-40a3-b8e0-84396d3f452c",
+				"method": "GET"
+			},
+			{
+				"id": "b971c66d-61fb-41b2-9f20-db3a1fee88b3",
+				"method": "GET"
+			},
+			{
+				"id": "d1711d58-17bb-4d45-a226-6b1f606fbc6d",
+				"method": "GET"
+			},
+			{
+				"id": "2f7e69ee-eacd-4dd6-960f-d8161827cc50",
+				"method": "GET"
+			},
+			{
+				"id": "1cf514a4-c1b5-44a7-93a5-c8145087339e",
+				"method": "POST"
+			},
+			{
+				"id": "3135a8a6-98f7-4c4d-94ea-85fab1952e6d",
+				"method": "POST"
+			},
+			{
+				"id": "fca7aff3-996f-4cad-8dc5-a70c52b32236",
+				"method": "POST"
+			},
+			{
+				"id": "4592b588-897c-4d5c-8722-8b7ce6c4e2ca",
+				"method": "POST"
+			},
+			{
+				"id": "266e453f-584c-406a-9900-69f742e7bb89",
+				"method": "POST"
+			},
+			{
+				"id": "3bba7676-5585-49cc-85d4-49c87ad42bf4",
+				"method": "POST"
+			},
+			{
+				"id": "84e06e25-0bbc-4a2b-8f58-f5385d555da6",
+				"method": "PUT"
+			},
+			{
+				"id": "cc8c105f-6488-49f3-ada6-247b603369f4",
+				"method": "PUT"
+			},
+			{
+				"id": "62856a1c-d3d8-4953-a793-e9b9f5589e27",
+				"method": "GET"
+			},
+			{
+				"id": "bcf90947-94e1-4917-b349-dc1dd559885e",
+				"method": "POST"
+			},
+			{
+				"id": "46a0c0c4-d920-42c8-8412-014c635de2ab",
+				"method": "GET"
+			},
+			{
+				"id": "1d58c717-ab68-40f1-bf02-87cd6936fdbb",
+				"method": "GET"
+			},
+			{
+				"id": "519d4dd2-b39d-4aca-945a-d7bb1fbcb42b",
+				"method": "GET"
+			},
+			{
+				"id": "f25daf04-26fc-448f-8f5b-e09d306df412",
+				"method": "PUT"
+			},
+			{
+				"id": "9fec8fc6-b55b-47a0-b4a0-99fb2b17f027",
+				"method": "GET"
+			},
+			{
+				"id": "39f917e5-122f-473a-8d75-9d49198cc95a",
+				"method": "DELETE"
+			},
+			{
+				"id": "b00aaa23-f58e-4c64-8d1a-53883f66bc2a",
+				"method": "GET"
+			},
+			{
+				"id": "c3b747f1-d227-4aab-8ceb-9d5d80f1e285",
+				"method": "DELETE"
+			},
+			{
+				"id": "a963071d-813f-40ec-bb00-73442e283fda",
+				"method": "GET"
+			},
+			{
+				"id": "cac2eaca-786b-4f38-ad7d-d196a33d7cc4",
+				"method": "GET"
+			},
+			{
+				"id": "776c90fe-82d2-4b94-990f-7513a0a8ee27",
+				"method": "GET"
+			},
+			{
+				"id": "592b9f24-672d-463e-94d6-2da3902c51e9",
+				"method": "GET"
+			},
+			{
+				"id": "fe22153b-2a24-4374-8b2f-c77268f3caaf",
+				"method": "GET"
+			},
+			{
+				"id": "422c17b8-5012-448b-a824-e656099a8860",
+				"method": "GET"
+			},
+			{
+				"id": "5875b70c-7f3c-4ec9-a634-4535ab916db4",
+				"method": "PUT"
+			},
+			{
+				"id": "412d1e40-a9ad-450d-b2b4-376e6e2ffcb6",
+				"method": "GET"
+			},
+			{
+				"id": "0a7a989c-c7a4-4f3b-a050-fee07d52a0af",
+				"method": "PUT"
+			},
+			{
+				"id": "028665ab-7582-4cbe-b19d-28b06ba53fd2",
+				"method": "GET"
+			},
+			{
+				"id": "b980dc7a-dfe8-43d5-994a-01d41aec4aed",
+				"method": "PUT"
+			},
+			{
+				"id": "67c3612e-f240-49c6-bd10-acc097ca469a",
+				"method": "GET"
+			},
+			{
+				"id": "a9fcc6c9-2d0b-4670-906d-f7426b0ad124",
+				"method": "PUT"
+			},
+			{
+				"id": "265bf3bc-ac3b-45bb-9c48-b228c6883a20",
+				"method": "GET"
+			}
+		]
+	}
+}
